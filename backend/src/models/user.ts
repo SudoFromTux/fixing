@@ -4,6 +4,8 @@ interface User extends Document {
   username: string;
   email: string;
   password: string;
+  passwordResetOtpHash?: string | null;
+  passwordResetOtpExpiresAt?: Date | null;
 }
 
 const userSchema = new Schema<User>(
@@ -18,6 +20,14 @@ const userSchema = new Schema<User>(
     password: {
       type: String,
       required: true,
+    },
+    passwordResetOtpHash: {
+      type: String,
+      default: null,
+    },
+    passwordResetOtpExpiresAt: {
+      type: Date,
+      default: null,
     },
     username: {
       type: String,

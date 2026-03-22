@@ -28,7 +28,7 @@ export const InputBox = ({
         type={isHidden ? "password" : "text"}
         className="w-full cursor-text rounded-md border border-border-soft bg-bg-surface px-2 py-1 text-text-primary placeholder:text-text-secondary"
         ref={reference}
-        value={val && val}
+        value={Array.isArray(val) ? val.join(",") : val ?? undefined}
         onChange={onChangeHandler}
       ></input>
       {isPassInput && (

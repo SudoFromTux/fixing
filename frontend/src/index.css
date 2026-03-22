@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-primary-btn: 80 70 228;
+  --bg-secondary-btn: 224 231 255;
+  --bg-main: 249 250 251;
+  --bg-surface: 255 255 255;
+  --bg-tag: 238 242 255;
+  --text-primary-btn: 255 255 255;
+  --text-secondary-btn: 96 88 211;
+  --text-primary: 31 41 55;
+  --text-secondary: 72 81 95;
+  --text-tag: 31 41 55;
+  --border-soft: 203 213 225;
+}
+
+.dark {
+  --bg-primary-btn: 129 140 248;
+  --bg-secondary-btn: 30 41 59;
+  --bg-main: 2 6 23;
+  --bg-surface: 15 23 42;
+  --bg-tag: 30 41 59;
+  --text-primary-btn: 255 255 255;
+  --text-secondary-btn: 191 219 254;
+  --text-primary: 226 232 240;
+  --text-secondary: 148 163 184;
+  --text-tag: 226 232 240;
+  --border-soft: 51 65 85;
+}
+
 *,
 *::after,
 *::before {
@@ -9,4 +37,18 @@
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: rgb(var(--bg-main));
+  color: rgb(var(--text-primary));
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
 }

@@ -103,7 +103,9 @@ export const Card = ({
   const youtubeUrl = createYoutubeUrl(link);
 
   return (
-    <div className={` p-8 bg-white  shadow-md border rounded-md`}>
+    <div
+      className={`rounded-md border border-border-soft bg-bg-surface p-8 shadow-md`}
+    >
       <EditContentModal
         isEditModalOpen={isEditModalOpen}
         closeEditModal={closeEditModal}
@@ -175,7 +177,10 @@ export const Card = ({
         {(type === "Document" && link) ||
           (!isUrl && (
             <div>
-              <a href={link} className="text-blue-400 underline cursor-pointer">
+              <a
+                href={link}
+                className="cursor-pointer underline text-text-secondaryBtn"
+              >
                 Original Url
               </a>
             </div>

@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../config/redux/store";
 import { Content } from "../config/redux/contentSlice";
 import Plus from "../components/Icons/Plus";
+import useTheme from "../hooks/useTheme";
 
 const Dashboard = () => {
   // State Management
@@ -20,6 +21,7 @@ const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [filterContent, setFilterContent] = useState("My Brain");
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   // Fetch content using custom hook
   useContent("/content", { requiresAuth: true });
@@ -82,6 +84,8 @@ const Dashboard = () => {
           onBarsClick={() => setIsSidebarOpen(true)}
           onShareBrainClick={toggleShareModal}
           filterContent={filterContent}
+          theme={theme}
+          onThemeToggle={toggleTheme}
         />
 
         <ContentSection dataToRender={dataToRender} />

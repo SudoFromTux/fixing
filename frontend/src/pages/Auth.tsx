@@ -13,7 +13,7 @@ const Auth = () => {
   }
 
   return (
-    <div className=" h-screen">
+    <div className="h-screen bg-bg-main text-text-primary">
       <div className="w-full flex justify-between py-4 px-8">
         <AppTitle />
         <Button

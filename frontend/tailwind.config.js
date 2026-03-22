@@ -1,21 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         bg: {
-          primaryBtn: "#5046e4",
-          secondaryBtn: "#e0e7ff",
-          main: "#f9fafb",
-          tag: "#eef2ff"
+          primaryBtn: "rgb(var(--bg-primary-btn) / <alpha-value>)",
+          secondaryBtn: "rgb(var(--bg-secondary-btn) / <alpha-value>)",
+          main: "rgb(var(--bg-main) / <alpha-value>)",
+          surface: "rgb(var(--bg-surface) / <alpha-value>)",
+          tag: "rgb(var(--bg-tag) / <alpha-value>)",
         },
         text: {
-          primaryBtn: "#dbd9f9",
-          secondaryBtn: "#6058d3",
-          primary: "#1f2937",
-          secondary: "#48515f",
-          tag: "#1f2937"
+          primaryBtn: "rgb(var(--text-primary-btn) / <alpha-value>)",
+          secondaryBtn: "rgb(var(--text-secondary-btn) / <alpha-value>)",
+          primary: "rgb(var(--text-primary) / <alpha-value>)",
+          secondary: "rgb(var(--text-secondary) / <alpha-value>)",
+          tag: "rgb(var(--text-tag) / <alpha-value>)",
+        },
+        border: {
+          soft: "rgb(var(--border-soft) / <alpha-value>)",
         },
       },
     },

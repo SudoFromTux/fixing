@@ -25,7 +25,7 @@ const AuthForm = ({ isSignUpPage, switchTab }: authFormPropsType) => {
   }
 
   return (
-    <div className="bg-white w-full max-w-[600px] px-8 sm:w-3/4 md:w-5/12 lg:w-4/12 p-8 rounded-md shadow-lg flex flex-col justify-evenly">
+    <div className="flex w-full max-w-[600px] flex-col justify-evenly rounded-md bg-bg-surface px-8 p-8 text-text-primary shadow-lg sm:w-3/4 md:w-5/12 lg:w-4/12">
       <div className="pb-4">
         {isSignUpPage ? (
           <div>

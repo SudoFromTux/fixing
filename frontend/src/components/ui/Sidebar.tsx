@@ -71,8 +71,8 @@ const Sidebar = ({
       }}
     >
       <div
-        className={`lg:w-1/6 md:w-1/4 sm:w-1/3 min-h-screen border border-text-secondary border-opacity-20 md:flex flex-col pl-4 transition-all bg-white fixed  ${
-          isSidebarOpen ? "flex fixed z-50 bg-white overflow-hidden" : "hidden"
+        className={`fixed min-h-screen border border-border-soft bg-bg-surface text-text-primary transition-all md:flex md:w-1/4 lg:w-1/6 sm:w-1/3 flex-col pl-4 ${
+          isSidebarOpen ? "z-50 flex overflow-hidden" : "hidden"
         }`}
         onClick={(e: React.MouseEvent<HTMLDivElement>) => {
           if (e.target !== e.currentTarget) return;

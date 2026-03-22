@@ -28,7 +28,7 @@ const PopUpModal = ({
   const dispatch = useDispatch();
 
   return (
-    <div className=" fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-60 overflow-y-hidden z-50">
+    <div className=" fixed top-0 left-0 z-50 h-screen w-screen overflow-y-hidden bg-black bg-opacity-60">
       <div
         className="flex  w-full h-full  justify-center items-center"
         onClick={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,7 +39,7 @@ const PopUpModal = ({
         <div
           className={`${
             isDeleteModal ? "w-72" : "w-96"
-          } py-4 px-4 bg-white flex flex-col  rounded-md`}
+          } flex flex-col rounded-md border border-border-soft bg-bg-surface py-4 px-4 text-text-primary`}
         >
           <div className="pb-4 flex justify-between items-center">
             <h3 className="text-lg font-semibold">{title}</h3>

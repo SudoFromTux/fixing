@@ -1,4 +1,5 @@
 import Bars from "../Icons/Bars";
+import Plus from "../Icons/Plus";
 import Share from "../Icons/Share";
 import Button from "./Button";
 import ThemeToggle from "./ThemeToggle";
@@ -6,6 +7,7 @@ import { Theme } from "../../utils/theme";
 
 interface HeaderProps {
   onBarsClick: () => void;
+  onAddContentClick: () => void;
   onShareBrainClick: () => void;
   filterContent: string;
   theme: Theme;
@@ -14,6 +16,7 @@ interface HeaderProps {
 
 const Header = ({
   onBarsClick,
+  onAddContentClick,
   onShareBrainClick,
   filterContent,
   theme,
@@ -34,19 +37,19 @@ const Header = ({
     <div className="flex flex-wrap items-center justify-end gap-2 p-4">
       <ThemeToggle theme={theme} onToggle={onThemeToggle} />
       <Button
+        type="primary"
+        name="Add Content"
+        size="lg"
+        beforeIcon={<Plus />}
+        onClickHandler={onAddContentClick}
+      />
+      <Button
         type="secondary"
         name="Share Brain"
         size="lg"
         beforeIcon={<Share />}
         onClickHandler={onShareBrainClick}
       />
-      {/* <Button
-        type="primary"
-        name="Add Content"
-        size="lg"
-        beforeIcon={<Plus />}
-        onClickHandler={onAddContentClick}
-      /> */}
     </div>
   </div>
 );

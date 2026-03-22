@@ -6,7 +6,7 @@ import Twitter from "../Icons/Twitter";
 import YouTube from "../Icons/YouTube";
 import { useNavigate } from "react-router-dom";
 import AppTitle from "./AppTitle";
-import { CSSProperties, Dispatch, SetStateAction, useState } from "react";
+import { CSSProperties, Dispatch, SetStateAction, Fragment, useState } from "react";
 import logout from "../../utils/logout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
@@ -77,19 +77,19 @@ const Sidebar = ({
   ];
 
   return (
-    <div
-      className={` ${
-        isSidebarOpen &&
-        "modal-backdrop block bg-black bg-opacity-60 w-screen h-screen fixed z-30 transition-all"
-      }`}
-      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target !== e.currentTarget) return;
-        setIsSidebarOpen(false);
-      }}
-    >
+    <Fragment>
+      {isSidebarOpen && (
+        <div
+          className="modal-backdrop fixed inset-0 z-30 bg-black bg-opacity-60 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       <div
-        className={`glass-panel motion-slide-left fixed min-h-screen border border-border-soft bg-bg-surface text-text-primary transition-all md:flex md:w-1/4 lg:w-1/6 sm:w-1/3 flex-col pl-4 ${
-          isSidebarOpen ? "z-50 flex" : "hidden"
+        className={`glass-panel border border-border-soft bg-bg-surface text-text-primary transition-all flex-col pl-4 md:sticky md:top-0 md:flex md:h-screen md:w-1/4 md:shrink-0 lg:w-1/6 ${
+          isSidebarOpen
+            ? "motion-slide-left fixed inset-y-0 left-0 z-50 flex w-[min(20rem,82vw)]"
+            : "hidden"
         }`}
         style={
           isSidebarOpen
@@ -195,7 +195,7 @@ const Sidebar = ({
           </button>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

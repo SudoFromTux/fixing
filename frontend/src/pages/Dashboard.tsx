@@ -83,9 +83,10 @@ const Dashboard = () => {
       />
 
       {/* Main Content */}
-      <div className="relative mx-auto flex w-full flex-col justify-end bg-bg-main md:absolute md:right-0 md:w-3/4 lg:w-5/6">
+      <div className="relative z-10 ml-auto flex w-full flex-col justify-end bg-bg-main md:w-3/4 lg:w-5/6">
         <Header
           onBarsClick={() => setIsSidebarOpen(true)}
+          onAddContentClick={toggleAddContentModal}
           onShareBrainClick={toggleShareModal}
           filterContent={filterContent}
           theme={theme}
@@ -96,7 +97,9 @@ const Dashboard = () => {
       </div>
 
       <button
-        className="interactive-button pulse-ring motion-fade-up fixed bottom-6 right-6 rounded-2xl bg-bg-primaryBtn p-3 text-lg text-white shadow-xl hover:bg-opacity-90 md:p-4"
+        aria-label="Add Content"
+        title="Add Content"
+        className="interactive-button pulse-ring motion-fade-up fixed bottom-6 right-6 z-40 flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border-4 border-bg-surface bg-bg-primaryBtn text-white shadow-2xl hover:bg-opacity-90"
         style={{ "--motion-delay": "280ms" } as CSSProperties}
         onClick={toggleAddContentModal}
       >

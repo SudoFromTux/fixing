@@ -59,7 +59,7 @@ const PopUpModal = ({
                   beforeIcon={<Delete />}
                   onClickHandler={() =>
                     shareBrain({
-                      share: true,
+                      share: false,
                       closeModal,
                     })
                   }

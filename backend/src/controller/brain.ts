@@ -42,6 +42,27 @@ export const shareBrain = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
+
+    // Treat duplicate-key conflicts as an already-existing share link instead
+    // of surfacing a generic 500 to the client.
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === 11000
+    ) {
+      const existingShareLink = await ShareBrainModel.findOne({
+        userId: req.body.userId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "share link already exist",
+        data: existingShareLink,
+      });
+      return;
+    }
+
     res.status(500).json({
       success: false,
       error: error,

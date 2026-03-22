@@ -11,7 +11,7 @@ interface shareBrainProps {
 async function shareBrain({ share, closeModal, location }: shareBrainProps) {
   try {
     const result = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/brain/share`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/brain/share`,
       {
         share,
       },

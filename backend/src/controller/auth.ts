@@ -9,6 +9,19 @@ type requiredBodyType = {
   email?: string;
 };
 
+const isProduction = process.env.NODE_ENV === "production";
+
+const authCookieBaseOptions = {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
+} as const;
+
+const authCookieOptions = {
+  ...authCookieBaseOptions,
+  maxAge: 15 * 24 * 60 * 60 * 1000,
+} as const;
+
 export const signUpUser = async (req: Request, res: Response) => {
   try {
     const { username, password, email }: requiredBodyType = req.body;
@@ -50,9 +63,11 @@ export const signUpUser = async (req: Request, res: Response) => {
 export const signInUser = async (req: Request, res: Response) => {
   try {
     const { username, email, password }: requiredBodyType = req.body;
+    const normalizedUsername = username?.trim().toLowerCase();
+    const normalizedEmail = email?.trim().toLowerCase();
 
     const existingUser = await UserModel.findOne({
-      $or: [{ email }, { username }],
+      $or: [{ email: normalizedEmail }, { username: normalizedUsername }],
     });
 
     if (!existingUser?.password) {
@@ -75,21 +90,11 @@ export const signInUser = async (req: Request, res: Response) => {
       });
       return;
     }
-    console.log("signin endpoint");
-
     const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET!);
-
-    console.log(process.env.NODE_ENV === "production");
-    console.log(process.env.NODE_ENV === "production" ? "none" : "lax");
 
     res
       .status(200)
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        maxAge: 15 * 24 * 60 * 60 * 1000,
-      })
+      .cookie("token", token, authCookieOptions)
       .json({
         success: true,
         message: "user signed in successfully",
@@ -110,7 +115,7 @@ export const signInUser = async (req: Request, res: Response) => {
 
 export const logOutUser = (req: Request, res: Response) => {
   try {
-    res.status(200).clearCookie("token").json({
+    res.status(200).clearCookie("token", authCookieBaseOptions).json({
       success: true,
       message: "user logged out successfully",
     });

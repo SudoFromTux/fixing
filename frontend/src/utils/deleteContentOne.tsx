@@ -10,7 +10,7 @@ async function deleteContentOne(
 ) {
   try {
     const result = await axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}/content/${_id}`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/content/${_id}`,
       {
         headers: {
           "Content-Type": "application/json",

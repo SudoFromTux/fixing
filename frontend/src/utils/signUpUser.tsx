@@ -22,7 +22,7 @@ async function signUpUser(
 
   try {
     const result = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/auth/signup`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/signup`,
       {
         username,
         email,

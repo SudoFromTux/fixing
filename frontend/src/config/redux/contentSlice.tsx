@@ -33,7 +33,6 @@ const contentSlice = createSlice({
       state.content = [...state.content, action.payload];
     },
     removeContent: (state, action) => {
-      console.log(state.content);
       state.content = state.content.filter(
         (card) => card._id != action.payload
       );

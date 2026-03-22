@@ -13,7 +13,7 @@ async function createContent(
 ) {
   try {
     const result = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/content`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/content`,
       {
         title: inputTitle,
         link: inputLink,
@@ -28,7 +28,6 @@ async function createContent(
       dispatch(addContent(result.data.data));
       // @ts-expect-error "need to make a globals.d.ts"
       if (window.twttr && window.twttr.widgets) {
-        console.log("re run script");
         // @ts-expect-error "need to make a globals.d.ts"
         window.twttr.widgets.load();
       }

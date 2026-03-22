@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import validator from "validator";
 import { addUser } from "../config/redux/userSlice";
 import { AppDispatch } from "../config/redux/store";
 import { NavigateFunction } from "react-router-dom";
@@ -15,14 +14,19 @@ async function signInUser(
   const usernameOrEmail = usernameRef.current?.value ?? "";
   const password = passwordRef.current?.value ?? "";
 
-  if (!validator.isStrongPassword(password)) {
-    setInputErrorMsg("password must be strong.");
+  if (!usernameOrEmail.trim()) {
+    setInputErrorMsg("username or email is required.");
+    return;
+  }
+
+  if (!password.trim()) {
+    setInputErrorMsg("password is required.");
     return;
   }
 
   try {
     const result = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/auth/signin`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/signin`,
       {
         username: usernameOrEmail,
         email: usernameOrEmail,
@@ -34,7 +38,6 @@ async function signInUser(
     );
 
     if (result.data.success) {
-      console.log(result.data.data);
       dispatch(addUser(result.data.data));
       localStorage.setItem("isLoggedIn", result.data.data.email);
       navigate("/dashboard");

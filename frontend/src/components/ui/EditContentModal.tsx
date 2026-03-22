@@ -59,7 +59,7 @@ function editContent(
   ) {
     try {
       const result = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/content/${contentId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/content/${contentId}`,
         {
           title: inputTitle,
           link: inputLink,

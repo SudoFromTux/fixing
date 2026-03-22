@@ -45,17 +45,13 @@ export const getContentBulk = async (req: Request, res: Response) => {
       "userId",
       "email username"
     );
-    if (results.length === 0) {
-      res.status(204).json({
-        success: false,
-        message: "you don't have any content",
-      });
-      return;
-    }
 
     res.status(200).json({
       success: true,
-      message: "content fetched successfully",
+      message:
+        results.length === 0
+          ? "you don't have any content"
+          : "content fetched successfully",
       data: results,
     });
   } catch (error) {
@@ -101,8 +97,6 @@ export const updateContent = async (req: Request, res: Response) => {
     const contentId = req.params.id;
     const userId = req.body.userId;
 
-    console.log(req.body);
-
     const result = await ContentModel.findOneAndUpdate(
       {
         _id: contentId,
@@ -111,6 +105,14 @@ export const updateContent = async (req: Request, res: Response) => {
       req.body,
       { new: true }
     );
+
+    if (!result) {
+      res.status(404).json({
+        success: false,
+        message: "content does not exist",
+      });
+      return;
+    }
 
     res.status(200).json({
       success: true,
@@ -135,6 +137,14 @@ export const deleteContent = async (req: Request, res: Response) => {
       _id: contentId,
       userId,
     });
+
+    if (!result) {
+      res.status(404).json({
+        success: false,
+        message: "content does not exist",
+      });
+      return;
+    }
 
     res.status(200).json({
       success: true,

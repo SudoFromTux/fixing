@@ -36,7 +36,10 @@ function validateInput(req: Request, res: Response, next: NextFunction) {
       return;
     }
 
-    req.body = validatedData.data;
+    req.body = {
+      ...validatedData.data,
+      username: validatedData.data.username.trim().toLowerCase(),
+    };
 
     next();
   } catch (error) {

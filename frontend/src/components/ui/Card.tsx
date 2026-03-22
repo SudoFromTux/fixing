@@ -40,7 +40,6 @@ async function shareUrl(title: string, link: string) {
 
 function createYoutubeUrl(link: string) {
   const videoIdMatch = link.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/);
-  console.log(videoIdMatch);
   if (videoIdMatch) {
     return `https://www.youtube.com/embed/${videoIdMatch[1]}`;
   }

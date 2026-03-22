@@ -7,11 +7,15 @@ const AppTitle = () => {
 
   return (
     <div
-      className="flex items-center gap-2 cursor-pointer"
+      className="group flex items-center gap-2 cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
       onClick={() => navigate("/")}
     >
-      <Brain />
-      <h1 className="text-text-primary font-semibold text-2xl">Brainly</h1>
+      <div className="transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105">
+        <Brain />
+      </div>
+      <h1 className="text-text-primary font-semibold text-2xl">
+        Brainly
+      </h1>
     </div>
   );
 };

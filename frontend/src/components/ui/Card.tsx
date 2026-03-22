@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import Share from "../Icons/Share";
 import Delete from "../Icons/Delete";
 import YouTube from "../Icons/YouTube";
@@ -25,6 +25,7 @@ interface cardProps {
   createdAt: string;
   _id: string;
   isSharedBrain?: boolean;
+  animationDelayMs?: number;
 }
 
 async function shareUrl(title: string, link: string) {
@@ -65,6 +66,7 @@ export const Card = ({
   createdAt,
   _id,
   isSharedBrain,
+  animationDelayMs = 0,
 }: cardProps) => {
   const icon: {
     [key: string]: JSX.Element;
@@ -104,7 +106,8 @@ export const Card = ({
 
   return (
     <div
-      className={`rounded-md border border-border-soft bg-bg-surface p-8 shadow-md`}
+      className="group hover-lift-card motion-fade-up rounded-[1.5rem] border border-border-soft bg-bg-surface p-8 shadow-md"
+      style={{ "--motion-delay": `${animationDelayMs}ms` } as CSSProperties}
     >
       <EditContentModal
         isEditModalOpen={isEditModalOpen}
@@ -126,16 +129,16 @@ export const Card = ({
         />
       )}
 
-      <div className="flex justify-between items-center gap-6">
-        <div className="flex gap-2 items-center justify-center text-text-secondary">
-          <div className="min-w-fit">
+      <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-center gap-2 text-text-secondary">
+          <div className="min-w-fit rounded-full bg-bg-tag p-3 transition-transform duration-300 group-hover:scale-110 group-hover:text-bg-primaryBtn">
             <a href={link}>{iconToRender}</a>
           </div>
         </div>
-        <div className="flex  min-w-fit gap-4 items-center text-text-secondary">
+        <div className="flex min-w-fit items-center gap-2 text-text-secondary">
           {!isSharedBrain && (
             <div
-              className="cursor-pointer"
+              className="cursor-pointer rounded-full p-2 transition-all duration-300 hover:-translate-y-1 hover:bg-bg-tag hover:text-bg-primaryBtn"
               onClick={() => setIsEditModalOpen(true)}
             >
               <Edit />
@@ -143,24 +146,29 @@ export const Card = ({
           )}
           {!isSharedBrain && (
             <div
-              className="cursor-pointer"
+              className="cursor-pointer rounded-full p-2 transition-all duration-300 hover:-translate-y-1 hover:bg-bg-tag hover:text-bg-primaryBtn"
               onClick={() => setIsDeleteModalOpen(true)}
             >
               <Delete />
             </div>
           )}
-          <div className="cursor-pointer" onClick={() => shareUrl(title, link)}>
+          <div
+            className="cursor-pointer rounded-full p-2 transition-all duration-300 hover:-translate-y-1 hover:bg-bg-tag hover:text-bg-primaryBtn"
+            onClick={() => shareUrl(title, link)}
+          >
             <Share />
           </div>
         </div>
       </div>
       <div>
-        <h2 className="text-text-primary pt-4">{title}</h2>
+        <h2 className="pt-4 text-xl font-semibold text-text-primary transition-colors duration-300 group-hover:text-text-secondaryBtn">
+          {title}
+        </h2>
       </div>
       <div className="pt-4">
         {type === "YouTube" && youtubeUrl && (
           <iframe
-            className="w-full aspect-video rounded-md"
+            className="aspect-video w-full rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
             src={youtubeUrl}
             title="YouTube video player"
             frameBorder="0"
@@ -191,7 +199,7 @@ export const Card = ({
         {tags?.map((t) => (
           <span
             key={t + Math.random()}
-            className="m-1 px-3 py-1 rounded-full bg-bg-tag text-text-secondaryBtn"
+            className="m-1 rounded-full bg-bg-tag px-3 py-1 text-text-secondaryBtn transition-transform duration-300 hover:-translate-y-0.5"
           >
             #{t}
           </span>

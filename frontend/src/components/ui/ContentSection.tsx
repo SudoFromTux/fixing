@@ -71,10 +71,10 @@ const ContentSection = ({ dataToRender }: ContentSectionProps) => {
   return (
     <div
       ref={containerRef}
-      className="bg-bg-main min-h-screen my-4  ml-4 mr-8 gap-4 p-16 pr-8"
+      className="motion-fade-in min-h-screen bg-bg-main my-4 ml-4 mr-8 gap-4 p-16 pr-8"
     >
       {dataToRender.length > 0 &&
-        dataToRender.map(({ title, link, type, _id, createdAt, tags }) => (
+        dataToRender.map(({ title, link, type, _id, createdAt, tags }, index) => (
           <Card
             key={_id}
             title={title}
@@ -83,6 +83,7 @@ const ContentSection = ({ dataToRender }: ContentSectionProps) => {
             tags={tags}
             createdAt={createdAt}
             _id={_id}
+            animationDelayMs={index * 70}
           />
         ))}
     </div>

@@ -80,7 +80,7 @@ const AddContentModal = ({
 
   return (
     isModalOpen && (
-      <div className=" fixed top-0 left-0 z-50 h-screen w-screen overflow-y-hidden bg-black bg-opacity-60">
+      <div className="modal-backdrop fixed top-0 left-0 z-50 h-screen w-screen overflow-y-hidden bg-black bg-opacity-60">
         <div
           className="flex w-full h-full justify-center items-center"
           onClick={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -88,7 +88,7 @@ const AddContentModal = ({
             onModalClose();
           }}
         >
-          <div className="flex w-96 flex-col rounded-md border border-border-soft bg-bg-surface text-text-primary">
+          <div className="modal-panel flex w-96 flex-col rounded-2xl border border-border-soft bg-bg-surface text-text-primary shadow-2xl">
             <div className="p-4 flex justify-between items-center text-text-primary">
               <h3 className="text-lg font-semibold">Add Content</h3>
               <div onClick={onModalClose}>

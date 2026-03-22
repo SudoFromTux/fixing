@@ -15,7 +15,7 @@ const ThemeToggle = ({ theme, onToggle }: ThemeToggleProps) => {
       type="button"
       aria-label={`Switch to ${isDarkTheme ? "light" : "dark"} mode`}
       aria-pressed={isDarkTheme}
-      className="flex items-center gap-3 rounded-full border border-border-soft bg-bg-surface px-3 py-2 text-text-primary shadow-sm transition-all hover:bg-bg-tag"
+      className="interactive-button flex items-center gap-3 rounded-full border border-border-soft bg-bg-surface px-3 py-2 text-text-primary shadow-sm transition-all hover:bg-bg-tag"
       onClick={onToggle}
     >
       <div className="text-text-secondaryBtn">
@@ -35,4 +35,3 @@ const ThemeToggle = ({ theme, onToggle }: ThemeToggleProps) => {
 };
 
 export default ThemeToggle;
-

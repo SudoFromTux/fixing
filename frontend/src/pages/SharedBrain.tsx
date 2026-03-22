@@ -2,7 +2,7 @@ import useContent from "../hooks/useContent";
 import { Card } from "../components/ui/Card";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 import Macy from "macy";
 import { RootState } from "../config/redux/store";
 import { renderTwitterWidgets } from "../utils/twitterWidgets";
@@ -76,7 +76,10 @@ const SharedBrain = () => {
   return (
     data.length > 0 && (
       <div>
-        <div className="w-full text-center my-8 text-2xl font-semibold text-text-primary">
+        <div
+          className="motion-fade-up my-8 w-full text-center text-2xl font-semibold text-text-primary"
+          style={{ "--motion-delay": "90ms" } as CSSProperties}
+        >
           <span className="font-bold text-2xl">
             {data[0].userId.username}'s
           </span>{" "}
@@ -84,9 +87,9 @@ const SharedBrain = () => {
         </div>
         <div
           ref={containerRef}
-          className="bg-bg-main my-4 ml-4 mr-8 gap-4 p-16 pr-8"
+          className="motion-fade-in my-4 ml-4 mr-8 gap-4 bg-bg-main p-16 pr-8"
         >
-          {data.map(({ title, link, type, _id, createdAt, tags }) => (
+          {data.map(({ title, link, type, _id, createdAt, tags }, index) => (
             <Card
               key={_id}
               title={title}
@@ -96,6 +99,7 @@ const SharedBrain = () => {
               createdAt={createdAt}
               _id={_id}
               isSharedBrain={true}
+              animationDelayMs={index * 70}
             />
           ))}
         </div>

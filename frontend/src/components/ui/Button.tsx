@@ -22,7 +22,7 @@ const Button = ({
   onClickHandler,
 }: buttonProps) => {
   const defaultStyles =
-    "rounded-md flex gap-2 justify-center items-center hover:bg-opacity-80 transition-all";
+    "interactive-button rounded-md flex gap-2 justify-center items-center hover:bg-opacity-80 transition-all shadow-sm";
 
   const styleSize = {
     sm: "px-2 py-1 text-sm",
@@ -32,7 +32,7 @@ const Button = ({
 
   const styleType = {
     primary: "bg-bg-primaryBtn text-white",
-    secondary: "bg-bg-secondaryBtn text-text-secondaryBtn",
+    secondary: "bg-bg-secondaryBtn text-text-secondaryBtn border border-border-soft",
   };
 
   return (

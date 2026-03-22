@@ -1,5 +1,5 @@
 // Dashboard Component
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import AddContentModal from "../components/ui/AddContentModal";
 import Sidebar from "../components/ui/Sidebar";
 import useContent from "../hooks/useContent";
@@ -53,7 +53,11 @@ const Dashboard = () => {
 
   // JSX Render
   return (
-    <div className="flex w-screen">
+    <div className="relative flex min-h-screen w-screen overflow-hidden bg-bg-main">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="ambient-orb motion-float right-[-5rem] top-20 h-72 w-72 bg-bg-primaryBtn/15" />
+        <div className="ambient-orb motion-float-delayed left-[18%] top-[32%] h-56 w-56 bg-bg-secondaryBtn/80" />
+      </div>
       {/* Modals */}
 
       <AddContentModal
@@ -79,7 +83,7 @@ const Dashboard = () => {
       />
 
       {/* Main Content */}
-      <div className="bg-bg-main md:absolute md:right-0 md:w-3/4 lg:w-5/6 mx-auto w-full flex justify-end flex-col">
+      <div className="relative mx-auto flex w-full flex-col justify-end bg-bg-main md:absolute md:right-0 md:w-3/4 lg:w-5/6">
         <Header
           onBarsClick={() => setIsSidebarOpen(true)}
           onShareBrainClick={toggleShareModal}
@@ -92,7 +96,8 @@ const Dashboard = () => {
       </div>
 
       <button
-        className="fixed bottom-6 right-6 bg-bg-primaryBtn text-white p-2 md:p-4 rounded-md hover:bg-opacity-90 transition-all text-lg"
+        className="interactive-button pulse-ring motion-fade-up fixed bottom-6 right-6 rounded-2xl bg-bg-primaryBtn p-3 text-lg text-white shadow-xl hover:bg-opacity-90 md:p-4"
+        style={{ "--motion-delay": "280ms" } as CSSProperties}
         onClick={toggleAddContentModal}
       >
         <Plus />

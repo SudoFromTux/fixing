@@ -27,8 +27,10 @@ const useContent = (path: string) => {
         toast.warning("Add at least one content!");
       }
     } catch (error) {
-      toast.error((error as Error).message || "Error fetching content");
       console.error(error);
+      // @ts-expect-error "need to figure out type"
+      const errorMessage = error?.response?.data?.message || (error as Error).message || "Network error. Please try again.";
+      toast.error(errorMessage);
     }
   }
 

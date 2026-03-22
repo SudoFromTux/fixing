@@ -27,6 +27,9 @@ async function signInUser(
         username: usernameOrEmail,
         email: usernameOrEmail,
         password,
+      },
+      {
+        withCredentials: true,
       }
     );
 
@@ -39,8 +42,9 @@ async function signInUser(
   } catch (error) {
     console.error(error);
     // @ts-expect-error "need to figure out type"
-    setInputErrorMsg(error.response.data.message);
-    toast.error((error as Error).message || "Error signing in");
+    const errorMessage = error?.response?.data?.message || (error as Error).message || "Network error. Please try again.";
+    setInputErrorMsg(errorMessage);
+    toast.error(errorMessage);
   }
 }
 

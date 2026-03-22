@@ -4,8 +4,14 @@ import Button from "../components/ui/Button";
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const redirectToDashboard = () => {
-    navigate("/dashboard");
+
+  const handleGetStarted = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    } else {
+      navigate("/auth");
+    }
   };
 
   return (
@@ -27,7 +33,7 @@ const LandingPage = () => {
         name="Get Started"
         type="primary"
         size="lg"
-        onClickHandler={redirectToDashboard}
+        onClickHandler={handleGetStarted}
       />
     </div>
   );

@@ -27,6 +27,9 @@ async function signUpUser(
         username,
         email,
         password,
+      },
+      {
+        withCredentials: true,
       }
     );
 
@@ -36,8 +39,9 @@ async function signUpUser(
   } catch (error) {
     console.error(error);
     // @ts-expect-error "need to figure out type"
-    setInputErrorMsg(error.response.data.message);
-    toast.error((error as Error).message || "Error signing up");
+    const errorMessage = error?.response?.data?.message || (error as Error).message || "Network error. Please try again.";
+    setInputErrorMsg(errorMessage);
+    toast.error(errorMessage);
   }
 }
 

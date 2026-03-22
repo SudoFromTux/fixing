@@ -57,32 +57,39 @@ function editContent(
     contentId: string,
     dispatch: AppDispatch
   ) {
-    const result = await axios.put(
-      `${import.meta.env.VITE_BACKEND_URL}/content/${contentId}`,
-      {
-        title: inputTitle,
-        link: inputLink,
-        type: contentType,
-        tags: tagsArr,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const result = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/content/${contentId}`,
+        {
+          title: inputTitle,
+          link: inputLink,
+          type: contentType,
+          tags: tagsArr,
         },
-        withCredentials: true,
-      }
-    );
-    if (result.data.success) {
-      dispatch(updateContent(result.data.data));
-      // @ts-expect-error "need to make a globals.d.ts"
-      if (window.twttr && window.twttr.widgets) {
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if (result.data.success) {
+        dispatch(updateContent(result.data.data));
         // @ts-expect-error "need to make a globals.d.ts"
-        window.twttr.widgets.load();
+        if (window.twttr && window.twttr.widgets) {
+          // @ts-expect-error "need to make a globals.d.ts"
+          window.twttr.widgets.load();
+        }
+        closeEditModal();
+        toast.success("content updated successfully!", {
+          autoClose: 3000, // 3 seconds
+        });
       }
-      closeEditModal();
-      toast.success("content updated successfully!", {
-        autoClose: 3000, // 3 seconds
-      });
+    } catch (error) {
+      console.error(error);
+      // @ts-expect-error "need to figure out type"
+      const errorMessage = error?.response?.data?.message || (error as Error).message || "Network error. Please try again.";
+      toast.error(errorMessage);
     }
   }
 }

@@ -21,9 +21,6 @@ async function createContent(
         tags: tagsArr,
       },
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
         withCredentials: true,
       }
     );
@@ -41,8 +38,10 @@ async function createContent(
       });
     }
   } catch (error) {
-    toast.error((error as Error).message || "Error creating content");
     console.error(error);
+    // @ts-expect-error "need to figure out type"
+    const errorMessage = error?.response?.data?.message || (error as Error).message || "Network error. Please try again.";
+    toast.error(errorMessage);
   }
 }
 

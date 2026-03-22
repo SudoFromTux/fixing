@@ -22,7 +22,7 @@ const Dashboard = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   // Fetch content using custom hook
-  useContent("/content");
+  useContent("/content", { requiresAuth: true });
 
   // Get content from Redux store
   const content = useSelector((state: RootState) => state.content.content);

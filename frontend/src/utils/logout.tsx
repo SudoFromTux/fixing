@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { removeUser } from "../config/redux/userSlice";
 import { AppDispatch } from "../config/redux/store";
 import { emptyContent } from "../config/redux/contentSlice";
+import { clearAuthSession } from "./authSession";
 
 async function logout(navigate: NavigateFunction, dispatch: AppDispatch) {
   try {
@@ -19,7 +20,7 @@ async function logout(navigate: NavigateFunction, dispatch: AppDispatch) {
       toast.info("Logged out successfully");
       dispatch(removeUser());
       dispatch(emptyContent());
-      localStorage.removeItem("isLoggedIn");
+      clearAuthSession();
       navigate("/auth");
     }
   } catch (error) {

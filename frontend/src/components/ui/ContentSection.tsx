@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Card } from "./Card";
 import Macy from "macy";
 import { Content } from "../../config/redux/contentSlice";
+import { renderTwitterWidgets } from "../../utils/twitterWidgets";
 
 interface ContentSectionProps {
   dataToRender: Content[];
@@ -18,6 +19,10 @@ const ContentSection = ({ dataToRender }: ContentSectionProps) => {
   const macyInstanceRef = useRef<MacyInstance | null>(null);
 
   useEffect(() => {
+    if (dataToRender.some(({ type }) => type === "Twitter/X")) {
+      void renderTwitterWidgets();
+    }
+
     // Initialize Macy only once
     if (containerRef.current && !macyInstanceRef.current) {
       macyInstanceRef.current = Macy({

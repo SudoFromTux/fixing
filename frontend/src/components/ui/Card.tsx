@@ -13,6 +13,7 @@ import EditContentModal from "./EditContentModal";
 import PopUpModal from "./PopUpModal";
 import { deleteModalText, deleteModalTitle } from "../../config/config";
 import validator from "validator";
+import { copyTextToClipboard } from "../../utils/clipboard";
 
 axios.defaults.withCredentials = true;
 
@@ -28,11 +29,21 @@ interface cardProps {
 
 async function shareUrl(title: string, link: string) {
   try {
-    await navigator.share({
-      text: title,
-      url: link,
-    });
+    if (typeof navigator.share === "function") {
+      await navigator.share({
+        text: title,
+        url: link,
+      });
+      return;
+    }
+
+    await copyTextToClipboard(link);
+    toast.info("Link copied to clipboard");
   } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      return;
+    }
+
     toast.error((error as Error).message || "Error sharing content");
     console.error(error);
   }

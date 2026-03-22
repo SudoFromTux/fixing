@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { hasAuthSession } from "../utils/authSession";
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
-
   const handleGetStarted = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const isLoggedIn = hasAuthSession();
     if (isLoggedIn) {
       navigate("/dashboard");
     } else {

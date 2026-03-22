@@ -75,11 +75,6 @@ function editContent(
       );
       if (result.data.success) {
         dispatch(updateContent(result.data.data));
-        // @ts-expect-error "need to make a globals.d.ts"
-        if (window.twttr && window.twttr.widgets) {
-          // @ts-expect-error "need to make a globals.d.ts"
-          window.twttr.widgets.load();
-        }
         closeEditModal();
         toast.success("content updated successfully!", {
           autoClose: 3000, // 3 seconds

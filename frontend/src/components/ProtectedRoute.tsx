@@ -1,7 +1,8 @@
 import { Navigate, useLocation } from "react-router-dom";
+import { hasAuthSession } from "../utils/authSession";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = hasAuthSession();
   const location = useLocation();
 
   if (!isLoggedIn && location.pathname !== "/auth") {

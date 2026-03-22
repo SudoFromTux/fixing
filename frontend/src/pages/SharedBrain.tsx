@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import Macy from "macy";
 import { RootState } from "../config/redux/store";
+import { renderTwitterWidgets } from "../utils/twitterWidgets";
 
 interface MacyInstance {
   recalculate: (waitForImages?: boolean) => void;
@@ -23,6 +24,10 @@ const SharedBrain = () => {
   const macyInstanceRef = useRef<MacyInstance | null>(null);
 
   useEffect(() => {
+    if (data.some(({ type }) => type === "Twitter/X")) {
+      void renderTwitterWidgets();
+    }
+
     // Initialize Macy only once
     if (containerRef.current && !macyInstanceRef.current) {
       macyInstanceRef.current = Macy({

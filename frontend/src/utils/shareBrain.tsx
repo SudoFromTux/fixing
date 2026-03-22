@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Location } from "react-router-dom";
 import { toast } from "react-toastify";
+import { copyTextToClipboard } from "./clipboard";
 
 interface shareBrainProps {
   share: boolean;
@@ -35,7 +36,7 @@ async function shareBrain({ share, closeModal, location }: shareBrainProps) {
 
       const publicUrl = Url.replace(pathname, "/brain/");
 
-      navigator.clipboard.writeText(publicUrl + hash);
+      await copyTextToClipboard(publicUrl + hash);
 
       toast.info("Copied to clipboard");
     } else {

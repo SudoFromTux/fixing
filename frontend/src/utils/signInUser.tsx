@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { addUser } from "../config/redux/userSlice";
 import { AppDispatch } from "../config/redux/store";
 import { NavigateFunction } from "react-router-dom";
+import { saveAuthSession } from "./authSession";
 
 async function signInUser(
   usernameRef: React.RefObject<HTMLInputElement>,
@@ -39,7 +40,7 @@ async function signInUser(
 
     if (result.data.success) {
       dispatch(addUser(result.data.data));
-      localStorage.setItem("isLoggedIn", result.data.data.email);
+      saveAuthSession(result.data.data.token, result.data.data.email);
       navigate("/dashboard");
     }
   } catch (error) {
